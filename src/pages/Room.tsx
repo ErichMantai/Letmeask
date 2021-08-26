@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom'
 
+import toast, { Toaster } from 'react-hot-toast';
+
 import logoImg from '../assets/images/logo.svg';
 
 import { Button } from '../components/Button';
@@ -48,7 +50,9 @@ export function Room() {
 
     await database.ref(`rooms/${roomId}/questions`).push(question);
 
-    setNewQuestion('');
+    toast.success("Pergunta enviada com sucesso!");
+
+     setNewQuestion('');
   }
 
   async function handleLikeQuestion(questionId: string, likeId: string | undefined) {
@@ -82,7 +86,7 @@ export function Room() {
             onChange={event => setNewQuestion(event.target.value)}
             value={newQuestion}
           />
-
+           <Toaster />
           <div className="form-footer">
             { user ? (
               <div className="user-info">
